@@ -13,6 +13,65 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
 - [Keyword Extraction](#keyword-extraction)
 - [Related Keywords](#related-keywords)
 
+## Category Detection
+
+  Given a sentence, our model is able to classify it amongst the following categories:
+
+  ```
+  arts, automobiles, books, business, corrections, education, fashion, health, insider, jobs, magazine, movies, multimedia, nyregion, obituaries, opinion, politics, reader-center, realestate, science, smarter-living, sports, t-magazine, technology, theater, travel, upshot, us, well, world
+  ```
+
+### Architecture
+  * convolution banks + highway networks + fc
+  * used pretrained word embeddings
+  * vocabulary: 50k
+  * inputs: last 100 words in summary.
+  * targets: category.
+
+### Evaluation on dev set
+  * Accuracy at 1: 67%
+  * Accuracy at 3: 90%
+
+## Offensive Content
+
+  The goal is to determine if a text is sexual or not.
+
+### Architecture
+  * vocabulary: 400k from glove.100d
+  * inputs: last 100 words in text.
+  * Convolution Banks
+  * Hiway Networks
+  * GRU -> Last hidden vector
+  * FC to 2 labels (sexual vs. clean)
+
+### Results
+  * global step: 23088
+  * precision: 272318/273260=1.00 (sexual out of sexual)
+  * recall: 272318/273119=1.00 (correctly predicted ones out of true sexual samples)
+  * acc: 544689/546432=1.00
+
+## Sentiment Analysis
+
+  Mutli-class multi-label classification of a sentence's emotion.
+
+### Architecture
+  * vocabulary: 400k from glove.100d
+  * inputs: last 100 words in text.
+  * Convolution Banks
+  * Hyway Networks
+  * GRU -> Last hidden vector
+  * FC to 1.4K (Emojis)
+
+## Keyword Extraction
+
+  Determine which words in a sentence are the most relevant keywords.
+
+### Architecture
+  * Binary Classification (Sequence labelling)
+  * vocabulary: 400k from glove.100d
+  * inputs: last 100 words in text
+  * Two residual bidirectional GRUs
+  * FC to 2 labels (is_keyword vs. not_keyword)
 
 ## Getting Started
 - [Installing TensorFlow](#installing-tensorflow) 
@@ -21,6 +80,11 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
 - [Training](#training)
 - [Launching the services](#launching-the-services)
 - [Calling the apis](#calling-the-apis)
+
+## Related Keywords
+
+  Given a keyword, list related words.
+  For this model we used word embedding.
 
 ## Installing TensorFlow
 
