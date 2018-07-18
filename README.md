@@ -121,7 +121,7 @@ Use pip list to show the packages installed in the virtual environment. Validate
 
  We offer pretrained versions of our models for download.
 
- On the training[Training](#training) section you can read more about training our models from scratch on your own dataset.
+ On the [training](#training) section you can read more about training our models from scratch on your own dataset.
 
  Download all our models on [http://storage.googleapis.com/vidy-nlp-models/v1.0-release.tar.gz](http://storage.googleapis.com/vidy-nlp-models/v1.0-release.tar.gz)
 
