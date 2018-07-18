@@ -135,26 +135,40 @@ WIP
 
 ## Launching the services
 
+```
 export FLASK_APP=emoji_service.py
 flask run --host=0.0.0.0 --port=5001
+```
 
+```
 export FLASK_APP=safe_service.py
 flask run --host=0.0.0.0 --port=5002
+```
 
+```
 export FLASK_APP=related_service.py
 flask run --host=0.0.0.0 --port=5003
-
+```
 
 ## Calling the apis
 
+```
 curl -X POST -d '[{"text":"I love you"},{"text":"It is so hot today"}]' -H 'Content-type: application/json' http://130.211.155.193:5000/analyze-category
+```
 
+```
 curl -X POST -d '[{"text":"I love you"},{"text":"It is so hot today"}]' -H 'Content-type: application/json' http://130.211.155.193:5001/analyze-emoji
+```
 
+```
 curl -X POST -d '[{"text":"I love you"},{"text":"It is so hot today"}]' -H 'Content-type: application/json' http://130.211.155.193:5002/analyze-safe
+```
 
+```
 curl -X POST -d '{"word":"car"}' -H 'Content-type: application/json' http://130.211.155.193:5003/analyze-related
+```
 
+```
 curl -X POST -d '{"text":"It is so hot today"}' -H 'Content-type: application/json' http://130.211.155.193:5003/analyze-keyword-extraction
-
+```
 
