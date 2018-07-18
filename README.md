@@ -7,8 +7,8 @@ Vidy has invented the first single-page invisible embed layer for video, run on 
 With just a hold, users can now reveal tiny hyper-relevant videos hidden behind the text of any page on the web, unlocking a whole new dimension to the internet.
 
 ## Models
-- [Category Detection](#category-model) 
-- [Offensive Content](#safety-model)
+- [Category Detection](#category-detection) 
+- [Offensive Content](#offensive-content)
 - [Sentiment Analysis](#sentiment-analysis)
 - [Keyword Extraction](#keyword-extraction)
 - [Related Keywords](#related-keywords)
