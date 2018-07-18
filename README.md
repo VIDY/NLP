@@ -16,12 +16,11 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
 
 ## Getting Started
 - [Installing TensorFlow](#installing-tensorflow) 
-- [Downloading models](#downloads)
-- [Setting up Flask](#flask)
+- [Downloading models](#downloading-pretrained-models)
+- [Setting up Flask](#setting-up-flask)
 - [Training](#training)
-- [Launching the services](#services)
-- [Calling the apis](#apis)
-
+- [Launching the services](#launching-the-services)
+- [Calling the apis](#calling-the-apis)
 
 ## Installing TensorFlow
 
