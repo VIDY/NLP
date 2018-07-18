@@ -33,6 +33,7 @@ TensorFlow was originally developed by researchers and engineers working on the 
 
 ### Installation
  For succinctness we'll focus on installation instructions for the Ubuntu operating system. 
+
  *See [Installing TensorFlow](https://www.tensorflow.org/get_started/os_setup.html) for instructions on how to install release binaries or how to build from source on other platforms.*
 
 
@@ -114,4 +115,46 @@ Use pip list to show the packages installed in the virtual environment. Validate
 ```shell
 (venv)$ python -c "import tensorflow as tf; print(tf.__version__)"
 ```
+
+
+## Downloading Pretrained Models
+
+ We offer pretrained versions of our models for download.
+
+ On the training[Training](#training) section you can read more about training our models from scratch on your own dataset.
+
+ Download all our models on [http://storage.googleapis.com/vidy-nlp-models/v1.0-release.tar.gz](http://storage.googleapis.com/vidy-nlp-models/v1.0-release.tar.gz)
+
+## Setting up Flask
+
+WIP
+
+## Training
+
+WIP
+
+## Launching the services
+
+export FLASK_APP=emoji_service.py
+flask run --host=0.0.0.0 --port=5001
+
+export FLASK_APP=safe_service.py
+flask run --host=0.0.0.0 --port=5002
+
+export FLASK_APP=related_service.py
+flask run --host=0.0.0.0 --port=5003
+
+
+## Calling the apis
+
+curl -X POST -d '[{"text":"I love you"},{"text":"It is so hot today"}]' -H 'Content-type: application/json' http://130.211.155.193:5000/analyze-category
+
+curl -X POST -d '[{"text":"I love you"},{"text":"It is so hot today"}]' -H 'Content-type: application/json' http://130.211.155.193:5001/analyze-emoji
+
+curl -X POST -d '[{"text":"I love you"},{"text":"It is so hot today"}]' -H 'Content-type: application/json' http://130.211.155.193:5002/analyze-safe
+
+curl -X POST -d '{"word":"car"}' -H 'Content-type: application/json' http://130.211.155.193:5003/analyze-related
+
+curl -X POST -d '{"text":"It is so hot today"}' -H 'Content-type: application/json' http://130.211.155.193:5003/analyze-keyword-extraction
+
 
