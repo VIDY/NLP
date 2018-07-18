@@ -73,6 +73,11 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
   * Two residual bidirectional GRUs
   * FC to 2 labels (is_keyword vs. not_keyword)
 
+## Related Keywords
+
+  Given a keyword, list related words.
+  For this model we used word embedding.
+
 ## Getting Started
 - [Installing TensorFlow](#installing-tensorflow) 
 - [Downloading models](#downloading-pretrained-models)
@@ -80,11 +85,6 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
 - [Training](#training)
 - [Launching the services](#launching-the-services)
 - [Calling the apis](#calling-the-apis)
-
-## Related Keywords
-
-  Given a keyword, list related words.
-  For this model we used word embedding.
 
 ## Installing TensorFlow
 
