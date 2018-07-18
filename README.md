@@ -28,11 +28,12 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
 <p align="center"><img width="70%" src="images/tensorflow.png" /></p>
 
 TensorFlow is an open-source software library for dataflow programming across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks
+
 TensorFlow was originally developed by researchers and engineers working on the Google Brain team within Google's Machine Intelligence Research organization for the purposes of conducting machine learning and deep neural networks research.
 
 ### Installation
  For succinctness we'll focus on installation instructions for the Ubuntu operating system. 
- *See [Installing TensorFlow](https://www.tensorflow.org/get_started/os_setup.html) for instructions on how to install release binaries or how to build from source on other platforms.
+ *See [Installing TensorFlow](https://www.tensorflow.org/get_started/os_setup.html) for instructions on how to install release binaries or how to build from source on other platforms.*
 
 
  **1. Install Python, pip, and virtualenv.**
