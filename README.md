@@ -127,7 +127,7 @@ Use pip list to show the packages installed in the virtual environment. Validate
 
 ## Setting up Flask
 
-<p align="center"><img width="70%" src="images/nlp.jpg" /></p>
+<p align="center"><img width="70%" src="images/flask.png" /></p>
 
 
 Flask is a lightweight [WSGI](https://wsgi.readthedocs.io/) web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. It began as a simple wrapper around [Werkzeug](https://www.palletsprojects.com/p/werkzeug/) and [Jinja](https://www.palletsprojects.com/p/jinja/) and has become one of the most popular Python web application frameworks.
