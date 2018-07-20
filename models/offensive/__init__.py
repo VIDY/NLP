@@ -1,2 +1,2 @@
-__all__ = ["SentimentModel","Hyperparams"]
+__all__ = ["OffensiveModel","Hyperparams"]
 

@@ -14,11 +14,12 @@ from models.offensive.data_load import load_vocab
 class SentimentModel:
     def __init__(self):
       self.graph = Graph(mode="dev");
+      
       print("Graph loaded")
 
       self.sess = tf.Session()
       self.saver = tf.train.Saver()
-      self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
+      self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Model restored!")
 
     def eval(self,test_data):
 
@@ -26,15 +27,8 @@ class SentimentModel:
         Get evaluation accuray.
         '''
 
-
         texts, Y = load_data(mode="dev",data=test_data)
-
         hp.batch_size=len(texts)
-        print(hp.task_num)
-        print(hp.batch_size)
-        print(texts)
-        print(Y)
-
 
         # Load vocab
         word2idx, idx2word = self.graph.word2idx, self.graph.idx2word
@@ -60,7 +54,6 @@ class SentimentModel:
         final_results=[]
         for x, y, pred in zip(X, Y, preds):
           final_results.append(pred)
-          print("y: "+str(y)+" pred:"+str(pred))
 
         return final_results
 
