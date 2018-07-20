@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 
+import sys
 import os
 import json
 from models.category.hyperparams import Hyperparams as hp
@@ -9,21 +10,16 @@ import tensorflow as tf
 from models.category.train import Graph
 from models.category.data_load import get_batch_data, load_vocab, load_data
 from scipy.stats import spearmanr
-import sys
-import json
 
 class CategoryModel:
     def __init__(self):
 
+        self.graph = Graph(mode="dev");
+        print("Graph loaded")
 
-      self.graph = Graph(mode="dev");
-      print("Graph loaded")
-
-      self.sess = tf.Session()
-      self.saver = tf.train.Saver()
-      self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
-
-
+        self.sess = tf.Session()
+        self.saver = tf.train.Saver()
+        self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Model restored!")
 
     def eval(self,test_data):
         '''
@@ -42,7 +38,6 @@ class CategoryModel:
             text = np.fromstring(text, np.int32)
             X[i, -len(text):] = text
 
-        print("hp.batch_size:"+str(hp.batch_size))
         # Feed-forward
         ys, preds = [], []
         for step in range(len(X) // hp.batch_size):
@@ -52,9 +47,6 @@ class CategoryModel:
 
             ys.extend(y)
 
-            # # parse
-            # x = np.fromstring(x, tf.int32)
-            # x = np.pad(x, [(hp.max_len, 0)], mode="constant")[-hp.max_len:]  # prepadding
 
             # predict
             logits, gs = self.sess.run([self.graph.logits, self.graph.global_step], {self.graph.x: x, self.graph.y:y}) # (N, len(cat))
@@ -62,18 +54,12 @@ class CategoryModel:
 
             final_predictions=[]
             for i in range(len(predictions)):
-              print(str(predictions[i])) 
-              scores=[]
-              for j in range(len(predictions[i])):
-                scores.append({"score":predictions[i][j],"category":hp.categories[j]})
-              sorted_scores = sorted(scores, key=lambda k: k['score'],reverse=True)
-              print(str(sorted_scores)) 
-              final_predictions.append(sorted_scores[0])
+                scores=[]
+                for j in range(len(predictions[i])):
+                  scores.append({"score":predictions[i][j],"category":hp.categories[j]})
+                sorted_scores = sorted(scores, key=lambda k: k['score'],reverse=True)
+                final_predictions.append(sorted_scores[0])
 
-            print(str(final_predictions))
-            #print(str(logits.tolist()))
-            #pred = np.argsort(logits, -1)[:, ::-1]
-            #preds.extend(pred.tolist())
 
         return final_predictions
 
