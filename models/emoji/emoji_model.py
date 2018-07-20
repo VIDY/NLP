@@ -1,6 +1,4 @@
 from __future__ import print_function
-
-
 import os
 import json
 from models.emoji.hyperparams import Hyperparams as hp
@@ -10,7 +8,6 @@ from models.emoji.train import Graph
 from models.emoji.data_load import get_batch_data, load_vocab, load_data
 from scipy.stats import spearmanr
 import sys
-import json
 from tqdm import tqdm
 
 class EmojiModel:

@@ -1,7 +1,5 @@
 from __future__ import print_function
-
 import os
-
 from models.keywords.hyperparams import Hyperparams as hp
 import numpy as np
 import tensorflow as tf
