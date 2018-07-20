@@ -26,15 +26,9 @@ class KeywordsModel:
         Get evaluation accuray.
         '''
 
-
         texts, Y = load_data(mode="dev",data=test_data)
 
         hp.batch_size=len(texts)
-        print(hp.task_num)
-        print(hp.batch_size)
-        print(texts)
-        print(Y)
-
 
         # Load vocab
         word2idx, idx2word = self.graph.word2idx, self.graph.idx2word
@@ -59,12 +53,11 @@ class KeywordsModel:
 
         final_results=[]
         for x, y, pred in zip(X, Y, preds):
-          y = np.fromstring(y, np.int32)
-          pred = np.array(pred, np.int32)
-          seqlen = len(y)
-          x, y, pred = x[-seqlen:], y[-seqlen:], pred[-seqlen:]
-          final_results.append(pred.tolist())
-          print("y: "+str(y)+" pred:"+str(pred))
-
+            y = np.fromstring(y, np.int32)
+            pred = np.array(pred, np.int32)
+            seqlen = len(y)
+            x, y, pred = x[-seqlen:], y[-seqlen:], pred[-seqlen:]
+            final_results.append(pred.tolist())
+            
         return final_results
 

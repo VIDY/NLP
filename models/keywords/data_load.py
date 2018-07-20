@@ -56,24 +56,14 @@ def load_data(mode="train", data=[]):
 
     Xs, Ys = [], []
     for entry in data:
-      indices, labels = refine2(entry["text"].strip())
-      print(entry["text"])
-      print(str(indices))
-      print(str(labels))
+        indices, labels = refine2(entry["text"].strip())
 
-      assert len(indices) == len(labels), "The length of indices and labels must be the same."
-      if len(indices) > 0:
-        Xs.append(np.array(indices, np.int32).tostring())
-        Ys.append(np.array(labels, np.int32).tostring())
+        assert len(indices) == len(labels), "The length of indices and labels must be the same."
+        if len(indices) > 0:
+          Xs.append(np.array(indices, np.int32).tostring())
+          Ys.append(np.array(labels, np.int32).tostring())
 
     texts, labels = Xs, Ys
-
-    print(str(texts))
-    print(str(labels))
-
-    # Monitor
-    print("number of samples:", len(texts))
-    print("texts look like:", " ".join(idx2word[t] for t in np.fromstring(texts[0], np.int32)))
 
     return texts, labels
 
@@ -94,10 +84,9 @@ def get_batch_data():
 
         label_shape = []
 
-        if hp.task_num == 3:
-            label = tf.decode_raw(label, tf.int32)
-            label = tf.pad(label, [(hp.max_len, 0)], mode="CONSTANT", constant_values=1)[-hp.max_len:]  # prepadding
-            label_shape = [hp.max_len,]
+        label = tf.decode_raw(label, tf.int32)
+        label = tf.pad(label, [(hp.max_len, 0)], mode="CONSTANT", constant_values=1)[-hp.max_len:]  # prepadding
+        label_shape = [hp.max_len,]
 
         # Batching
         texts, labels = tf.train.batch([text, label],
