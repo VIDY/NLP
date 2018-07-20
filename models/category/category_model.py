@@ -3,11 +3,11 @@ from __future__ import print_function
 
 import os
 import json
-from models.hyperparams import Hyperparams as hp
+from models.category.hyperparams import Hyperparams as hp
 import numpy as np
 import tensorflow as tf
-from models.train import Graph
-from models.data_load import get_batch_data, load_vocab, load_data
+from models.category.train import Graph
+from models.category.data_load import get_batch_data, load_vocab, load_data
 from scipy.stats import spearmanr
 import sys
 import json
@@ -68,7 +68,7 @@ class CategoryModel:
                 scores.append({"score":predictions[i][j],"category":hp.categories[j]})
               sorted_scores = sorted(scores, key=lambda k: k['score'],reverse=True)
               print(str(sorted_scores)) 
-              final_predictions.append(scores[0])
+              final_predictions.append(sorted_scores[0])
 
             print(str(final_predictions))
             #print(str(logits.tolist()))

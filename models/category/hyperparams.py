@@ -20,7 +20,7 @@ class Hyperparams:
     #dev = 'data/test.txt'
     dev = '/var/www/html/nlp/input/category.txt'
     test = 'data/test.txt'
-    glove = 'glove.6B/glove.6B.300d.txt'
+    glove = '../glove.6B/glove.6B.300d.txt'
 
 
     # model
@@ -37,7 +37,7 @@ class Hyperparams:
     num_epochs = 500
     batch_size = 32  # alias = N
     lr = 0.0005  # learning rate.
-    logdir = 'log/01'  # log directory
+    logdir = '../log/01'  # log directory
     results = "results" # results
 
 

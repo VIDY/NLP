@@ -1,6 +1,6 @@
 from __future__ import print_function
 import tensorflow as tf
-from models.hyperparams import Hyperparams as hp
+from models6.hyperparams import Hyperparams as hp
 import codecs
 import numpy as np
 
@@ -27,10 +27,12 @@ def embed(inputs, vocab_size, num_units, zero_pad=True, scope="embedding", reuse
         # Load pretrained word vectors
         wvs = np.random.normal(size=(hp.num_vocab, num_units))
         for i, line in enumerate(open(hp.glove, 'r')):
-            i += 3
+            i += 2
             if i == hp.num_vocab: break
             wv = line.split()[1:]
             wvs[i, :] = wv
+
+        # print(wvs[81])
 
         lookup_table = tf.get_variable('lookup_table',
                                        dtype=tf.float32,
@@ -192,7 +194,7 @@ def gru(inputs, num_units=None, bidirection=False, scope="gru", reuse=None):
 
     with tf.variable_scope(scope, reuse=reuse):
         if num_units is None:
-            num_units = inputs.get_shape().as_list[-1]
+            num_units = inputs.get_shape().as_list()[-1]
 
         cell = tf.contrib.rnn.GRUCell(num_units)
         if bidirection:

@@ -1,5 +1,5 @@
 from __future__ import print_function
-from models.hyperparams import Hyperparams as hp
+from models.category.hyperparams import Hyperparams as hp
 import tensorflow as tf
 import numpy as np
 import re, regex
