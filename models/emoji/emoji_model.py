@@ -35,9 +35,6 @@ class EmojiModel:
         texts, Y = load_data(mode="dev",data=test_data)
 
         hp.batch_size=len(texts)
-        print(hp.batch_size)
-        print(texts)
-        print(Y)
 
         # Parse
         X = np.zeros((len(texts), hp.max_len), np.int32)
@@ -65,13 +62,7 @@ class EmojiModel:
 
         # calculation
 
-        print("pred:" + str(preds))
-        #with open('/var/www/html/nlp/output/emoji.txt', 'w') as fout:
-        #  json.dump(preds,fout)
-
         hits, predictions, labels = 0, 0, 0
-
-        print(seqlens)
 
         final_results=[]
         for y, pred, seqlen in zip(Y, preds, seqlens):
@@ -80,9 +71,6 @@ class EmojiModel:
 
 
             pred = pred[:seqlen] # -> pred <= K
-            print(y)
-            print(pred)
-            print(seqlen)
 
             # pred = [0, 1, 2]
             labeled_pred=[]
