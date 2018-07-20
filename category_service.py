@@ -1,7 +1,7 @@
 
 from __future__ import print_function
 
-import models.category_model
+import models.category.category_model
 
 import os
 import json
@@ -12,7 +12,7 @@ from flask import Flask, request
 app = Flask(__name__)
 app.debug = True
 
-category_graph = models.category_model.CategoryModel(); print("Category Graph loaded")
+category_graph = models.category.category_model.CategoryModel(); print("Category Graph loaded")
 
 @app.route('/analyze-category', methods=['POST'])
 def analyze_category():
