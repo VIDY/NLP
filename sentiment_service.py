@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 
-import models.offensive.sentiment_model
+import models.sentiment.sentiment_model
 
 import os
 import json
@@ -13,7 +13,7 @@ from flask import Flask, request
 app = Flask(__name__)
 app.debug = True
 
-sentiment_graph = models.offensive.sentiment_model.SentimentModel(); print("Category Graph loaded")
+sentiment_graph = models.sentiment.sentiment_model.SentimentModel(); print("Category Graph loaded")
 
 @app.route('/analyze-sentiment', methods=['POST'])
 def analyze_category():

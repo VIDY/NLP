@@ -1,5 +1,5 @@
 from __future__ import print_function
-from models.offensive.hyperparams import Hyperparams as hp
+from models.sentiment.hyperparams import Hyperparams as hp
 import tensorflow as tf
 import numpy as np
 import re
@@ -57,15 +57,8 @@ def load_data(mode="train", data=[]):
     texts = []
     labels = []
     for entry in data:
-      texts.append(np.array(refine(entry["text"]), np.int32).tostring())
-      labels.append(0)
-
-    print(str(texts))
-    print(str(labels))
-
-    # Monitor
-    print("number of samples:", len(texts))
-    print("texts look like:", " ".join(idx2word[t] for t in np.fromstring(texts[0], np.int32)))
+        texts.append(np.array(refine(entry["text"]), np.int32).tostring())
+        labels.append(0)
 
     return texts, labels
 
@@ -86,10 +79,6 @@ def get_batch_data():
 
         label_shape = []
 
-        if hp.task_num == 3:
-            label = tf.decode_raw(label, tf.int32)
-            label = tf.pad(label, [(hp.max_len, 0)], mode="CONSTANT", constant_values=1)[-hp.max_len:]  # prepadding
-            label_shape = [hp.max_len,]
 
         # Batching
         texts, labels = tf.train.batch([text, label],
