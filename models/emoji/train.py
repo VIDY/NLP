@@ -60,21 +60,15 @@ class Graph:
 
         # Readout
         self.logits = tf.layers.dense(enc, len(hp.labels))  # (N, L)
-        if hp.task_num == 1:
-            self.preds = tf.argmax(self.logits, -1) # (N,)
-        elif hp.task_num == 2:
-            self.val, self.preds = tf.nn.top_k(self.logits, k=hp.max_labels) # (N, K), (N, K)
-            self.seqlens = tf.count_nonzero(tf.greater(self.val, 0.), -1) # (N,). x > 0.
+        self.val, self.preds = tf.nn.top_k(self.logits, k=hp.max_labels) # (N, K), (N, K)
+        self.seqlens = tf.count_nonzero(tf.greater(self.val, 0.), -1) # (N,). x > 0.
 
         self.global_step = tf.Variable(0, name='global_step', trainable=False)
         if is_training:
             # Loss
-            if hp.task_num == 1:
-                self.loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=self.logits, labels=self.y)
-            elif hp.task_num == 2:
-                self.labels = tf.one_hot(indices=self.y, depth=len(hp.labels)) # (N, K, L)
-                self.labels = tf.reduce_sum(self.labels, 1) # (N, L)
-                self.loss = tf.nn.sigmoid_cross_entropy_with_logits(logits=self.logits, labels=self.labels)
+            self.labels = tf.one_hot(indices=self.y, depth=len(hp.labels)) # (N, K, L)
+            self.labels = tf.reduce_sum(self.labels, 1) # (N, L)
+            self.loss = tf.nn.sigmoid_cross_entropy_with_logits(logits=self.logits, labels=self.labels)
             self.loss = tf.reduce_mean(self.loss)
 
             # Training Scheme

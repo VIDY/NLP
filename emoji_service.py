@@ -1,11 +1,7 @@
 
 from __future__ import print_function
 
-
-import models.category_model
 import models.emoji.emoji_model
-import models3.safe_model
-import models.related.related_model
 
 import os
 import json

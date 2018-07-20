@@ -35,7 +35,6 @@ class EmojiModel:
         texts, Y = load_data(mode="dev",data=test_data)
 
         hp.batch_size=len(texts)
-        print(hp.task_num)
         print(hp.batch_size)
         print(texts)
         print(Y)
