@@ -1,8 +1,8 @@
 from __future__ import print_function
-from models5.hyperparams import Hyperparams as hp
+from models.offensive.hyperparams import Hyperparams as hp
 import tensorflow as tf
-from models5.data_load import get_batch_data, load_vocab
-from models5.modules import *
+from models.offensive.data_load import get_batch_data, load_vocab
+from models.offensive.modules import *
 from tqdm import tqdm
 
 class Graph:

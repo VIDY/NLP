@@ -1,5 +1,5 @@
 from __future__ import print_function
-from models6.hyperparams import Hyperparams as hp
+from models.offensive.hyperparams import Hyperparams as hp
 import tensorflow as tf
 import numpy as np
 import re
@@ -54,19 +54,11 @@ def refine2(text):
 
 def load_data(mode="train", data=[]):
 
-    Xs, Ys = [], []
+    texts = []
+    labels = []
     for entry in data:
-      indices, labels = refine2(entry["text"].strip())
-      print(entry["text"])
-      print(str(indices))
-      print(str(labels))
-
-      assert len(indices) == len(labels), "The length of indices and labels must be the same."
-      if len(indices) > 0:
-        Xs.append(np.array(indices, np.int32).tostring())
-        Ys.append(np.array(labels, np.int32).tostring())
-
-    texts, labels = Xs, Ys
+      texts.append(np.array(refine(entry["text"]), np.int32).tostring())
+      labels.append(0)
 
     print(str(texts))
     print(str(labels))

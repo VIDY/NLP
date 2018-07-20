@@ -2,13 +2,13 @@ from __future__ import print_function
 
 import os
 
-from models5.hyperparams import Hyperparams as hp
+from models.offensive.hyperparams import Hyperparams as hp
 import numpy as np
 import tensorflow as tf
-from models5.train import Graph
-from models5.data_load import load_data
+from models.offensive.train import Graph
+from models.offensive.data_load import load_data
 from tqdm import tqdm
-from models5.data_load import load_vocab
+from models.offensive.data_load import load_vocab
 
 
 class SentimentModel:

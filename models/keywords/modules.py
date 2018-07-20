@@ -1,6 +1,6 @@
 from __future__ import print_function
 import tensorflow as tf
-from models2.hyperparams import Hyperparams as hp
+from models.keywords.hyperparams import Hyperparams as hp
 import codecs
 import numpy as np
 
@@ -31,6 +31,8 @@ def embed(inputs, vocab_size, num_units, zero_pad=True, scope="embedding", reuse
             if i == hp.num_vocab: break
             wv = line.split()[1:]
             wvs[i, :] = wv
+
+        # print(wvs[81])
 
         lookup_table = tf.get_variable('lookup_table',
                                        dtype=tf.float32,

@@ -1,7 +1,6 @@
 class Hyperparams:
     '''Hyperparameters'''
-    # task number <- Adjust this.
-    task_num = 1 # 1: porno vs. clean, 2: sad vs. not_sad, 3: keyword vs. not_keyword
+    task_num = 1 
 
     labels = ["porno", "clean"]
     n_eval = None

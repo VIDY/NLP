@@ -1,6 +1,6 @@
 from __future__ import print_function
 import tensorflow as tf
-from models5.hyperparams import Hyperparams as hp
+from models.offensive.hyperparams import Hyperparams as hp
 import codecs
 import numpy as np
 

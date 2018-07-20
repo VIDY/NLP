@@ -1,6 +1,6 @@
 from __future__ import print_function
 import tensorflow as tf
-from models3.hyperparams import Hyperparams as hp
+from models.emoji.hyperparams import Hyperparams as hp
 import codecs
 import numpy as np
 

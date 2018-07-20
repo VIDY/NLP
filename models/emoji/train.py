@@ -1,8 +1,8 @@
 from __future__ import print_function
-from models2.hyperparams import Hyperparams as hp
+from models.emoji.hyperparams import Hyperparams as hp
 import tensorflow as tf
-from models2.data_load import get_batch_data, load_vocab, load_labels
-from models2.modules import *
+from models.emoji.data_load import get_batch_data, load_vocab, load_labels
+from models.emoji.modules import *
 from tqdm import tqdm
 
 class Graph:

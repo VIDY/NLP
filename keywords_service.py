@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 
-import models6.keywords_model
+import models.keywords.keywords_model
 
 import os
 import json
@@ -13,7 +13,7 @@ from flask import Flask, request
 app = Flask(__name__)
 app.debug = True
 
-keywords_graph = models6.keywords_model.KeywordsModel(); print("Category Graph loaded")
+keywords_graph = models.keywords.keywords_model.KeywordsModel(); print("Category Graph loaded")
 
 @app.route('/analyze-keywords', methods=['POST'])
 def analyze_category():

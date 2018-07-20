@@ -3,17 +3,17 @@ from __future__ import print_function
 
 import os
 import json
-from models3.hyperparams import Hyperparams as hp
+from models.emoji.hyperparams import Hyperparams as hp
 import numpy as np
 import tensorflow as tf
-from models3.train import Graph
-from models3.data_load import get_batch_data, load_vocab, load_data
+from models.emoji.train import Graph
+from models.emoji.data_load import get_batch_data, load_vocab, load_data
 from scipy.stats import spearmanr
 import sys
 import json
 from tqdm import tqdm
 
-class SafeModel:
+class EmojiModel:
     def __init__(self):
 
 
@@ -75,21 +75,22 @@ class SafeModel:
 
             # calculation
             if hp.task_num == 1:
-                final_results=[]
                 num0, num1, correct0, correct1 = 0, 0, 0, 0
-                print("preds: "+str(preds))
                 for y, pred in zip(Y, preds):
-                    final_results.append(pred)
-                    print("y: "+str(y)+" pred: "+str(pred))
+                    if y==0:
+                        num0 += 1
+                        if y == pred: correct0 += 1
+                    else:
+                        num1 += 1
+                        if y == pred: correct1 += 1
 
-                #acc0 = correct0 / float(num0)
-                #acc1 = correct1 / float(num1)
-                #acc = (correct0+correct1) / float(num0+num1)
+                acc0 = correct0 / float(num0)
+                acc1 = correct1 / float(num1)
+                acc = (correct0+correct1) / float(num0+num1)
 
-                #fout.write('gs: %05d, acc0: %d/%d=%.02f, acc1: %d/%d=%.02f, acc: %d/%d=%.02f\n'
-                #           %(gs, correct0, num0, acc0, correct1, num1, acc1,
-                #             correct0+correct1, num0+num1, acc))
-                return final_results
+                fout.write('gs: %05d, acc0: %d/%d=%.02f, acc1: %d/%d=%.02f, acc: %d/%d=%.02f\n'
+                           %(gs, correct0, num0, acc0, correct1, num1, acc1,
+                             correct0+correct1, num0+num1, acc))
             elif hp.task_num == 2:
 
 

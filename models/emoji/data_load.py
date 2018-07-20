@@ -1,5 +1,5 @@
 from __future__ import print_function
-from models2.hyperparams import Hyperparams as hp
+from models.emoji.hyperparams import Hyperparams as hp
 import tensorflow as tf
 import numpy as np
 import re
