@@ -33,7 +33,6 @@ def load_data(mode="train",data=[]):
     text_lengths, texts, categories = [], [], []
 
     for entry in data:
-        print(entry)
         text, category = entry["text"],"theater"
 
         text = text.lower()
@@ -47,13 +46,6 @@ def load_data(mode="train",data=[]):
 
         category = cat2idx[category]
         categories.append(category)
-
-    # Monitor
-
-    print("text lengths look like", text_lengths[:10])
-    print("texts look like", " ".join(idx2word[t] for t in np.fromstring(texts[0], np.int32)))
-    print("categories look like", categories[:10])
-    #print("test_data", json.dumps(test_data))
 
     return text_lengths, texts, categories
 
