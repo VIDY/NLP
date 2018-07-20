@@ -11,7 +11,7 @@ from tqdm import tqdm
 from models.offensive.data_load import load_vocab
 
 
-class SentimentModel:
+class OffensiveModel:
     def __init__(self):
       self.graph = Graph(mode="dev");
       
