@@ -18,7 +18,7 @@ class KeywordsModel:
 
       self.sess = tf.Session()
       self.saver = tf.train.Saver()
-      self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
+      self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Model restored!")
 
     def eval(self,test_data):
 
