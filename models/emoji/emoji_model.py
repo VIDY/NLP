@@ -17,12 +17,12 @@ class EmojiModel:
     def __init__(self):
 
 
-      self.graph = Graph(mode="dev");
-      print("Graph loaded")
+        self.graph = Graph(mode="dev");
+        print("Graph loaded")
 
-      self.sess = tf.Session()
-      self.saver = tf.train.Saver()
-      self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
+        self.sess = tf.Session()
+        self.saver = tf.train.Saver()
+        self.saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Model restored!")
 
 
     def eval(self,test_data):
@@ -46,95 +46,54 @@ class EmojiModel:
             text = np.fromstring(text, np.int32)
             X[i, -len(text):] = text
 
-        if hp.task_num == 2:
-            Y = [np.fromstring(label, np.int32) for label in Y]
-
-    
-        # Restore parameters
-        #saver.restore(self.sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
-
-        with open('{}/eval.txt'.format(hp.logdir), 'a') as fout:
-            # Feed-forward
-            preds, seqlens = [], []
-            for step in tqdm(range(len(X) // hp.batch_size)):
-                # batch
-                x = X[step * hp.batch_size: (step + 1) * hp.batch_size]
-                # y = labels[step * hp.batch_size: (step + 1) * hp.batch_size]
-                #
-                # ys.extend(y)
-
-                # predict
-                if hp.task_num == 1:
-                    preds_, gs = self.sess.run([self.graph.preds, self.graph.global_step], {self.graph.x: x}) # (N,)
-                elif hp.task_num == 2:
-                    # preds_, = self.sess.run([self.graph.preds], {self.graph.x: x})  # (N, K)
-                    # print(preds_)
-                    preds_, seqlens_, gs = self.sess.run([self.graph.preds, self.graph.seqlens, self.graph.global_step], {self.graph.x: x})  # (N, K)
-                    seqlens.extend(seqlens_.tolist())
-                preds.extend(preds_.tolist())
-
-            # calculation
-            if hp.task_num == 1:
-                num0, num1, correct0, correct1 = 0, 0, 0, 0
-                for y, pred in zip(Y, preds):
-                    if y==0:
-                        num0 += 1
-                        if y == pred: correct0 += 1
-                    else:
-                        num1 += 1
-                        if y == pred: correct1 += 1
-
-                acc0 = correct0 / float(num0)
-                acc1 = correct1 / float(num1)
-                acc = (correct0+correct1) / float(num0+num1)
-
-                fout.write('gs: %05d, acc0: %d/%d=%.02f, acc1: %d/%d=%.02f, acc: %d/%d=%.02f\n'
-                           %(gs, correct0, num0, acc0, correct1, num1, acc1,
-                             correct0+correct1, num0+num1, acc))
-            elif hp.task_num == 2:
+        Y = [np.fromstring(label, np.int32) for label in Y]
 
 
-                print("pred:" + str(preds))
-                #with open('/var/www/html/nlp/output/emoji.txt', 'w') as fout:
-                #  json.dump(preds,fout)
+        # Feed-forward
+        preds, seqlens = [], []
+        for step in tqdm(range(len(X) // hp.batch_size)):
+            # batch
+            x = X[step * hp.batch_size: (step + 1) * hp.batch_size]
+            # y = labels[step * hp.batch_size: (step + 1) * hp.batch_size]
+            #
+            # ys.extend(y)
 
-                hits, predictions, labels = 0, 0, 0
+            # predict
 
-                print(seqlens)
+            preds_, seqlens_, gs = self.sess.run([self.graph.preds, self.graph.seqlens, self.graph.global_step], {self.graph.x: x})  # (N, K)
+            seqlens.extend(seqlens_.tolist())
+            preds.extend(preds_.tolist())
 
-                final_results=[]
-                for y, pred, seqlen in zip(Y, preds, seqlens):
-                    # y: ?, pred: K, seqlen: scalar
-                    seqlen = max(1, seqlen)
+        # calculation
 
+        print("pred:" + str(preds))
+        #with open('/var/www/html/nlp/output/emoji.txt', 'w') as fout:
+        #  json.dump(preds,fout)
 
-                    pred = pred[:seqlen] # -> pred <= K
-                    print(y)
-                    print(pred)
-                    print(seqlen)
+        hits, predictions, labels = 0, 0, 0
 
-                    # pred = [0, 1, 2]
-                    labeled_pred=[]
-                    for unlabeled_pred in pred:
-                      labeled_pred.append(hp.labels[unlabeled_pred])
+        print(seqlens)
 
-                    final_results.append(labeled_pred)
-
-                    hits += len(np.intersect1d(y, pred))
-                    predictions += len(pred)
-                    labels += len(y)
-
-                return final_results
-                with open('/var/www/html/nlp/output/emoji.txt', 'w') as fout:
-                  json.dump(final_results,fout)
+        final_results=[]
+        for y, pred, seqlen in zip(Y, preds, seqlens):
+            # y: ?, pred: K, seqlen: scalar
+            seqlen = max(1, seqlen)
 
 
-                #precision = hits / float(predictions + 0.0000001)
-                #recall = hits / float(labels + 0.0000001)
-                #f1 = 2. * precision * recall / (precision+recall)
+            pred = pred[:seqlen] # -> pred <= K
+            print(y)
+            print(pred)
+            print(seqlen)
 
-                #fout.write("-------------\n")
-                #fout.write('gs: %d\n' % gs)
-                #fout.write('precision: %d/%d=%.02f\n' % (hits, predictions, precision))
-                #fout.write('recall: %d/%d=%.02f\n' % (hits, labels, recall))
-                #fout.write('f1 score: %.02f\n' % f1)
+            # pred = [0, 1, 2]
+            labeled_pred=[]
+            for unlabeled_pred in pred:
+              labeled_pred.append(hp.labels[unlabeled_pred])
+
+            final_results.append(labeled_pred)
+
+            hits += len(np.intersect1d(y, pred))
+            predictions += len(pred)
+            labels += len(y)
+
+        return final_results

@@ -34,76 +34,23 @@ def refine(text):
     return text
 
 def load_data(mode="train",data=[]):
-    if hp.task_num == 1:
-        if mode == "train":
-            f = hp.train_p # porno
-            g = hp.train_c # clean
-        elif mode == "dev":
-            f = hp.dev_p
-            g = hp.dev_c
-        else:
-            f = hp.test_p
-            g = hp.test_c
 
-        # porno
-        porno = []
-        for line in codecs.open(f, 'r', 'utf8'):
-            try:
-                text = line.split(";")[1]
-            except IndexError:
-                continue
+    texts, labels = [], []
+    i = 0
+    for entry in data:
+        i += 1
+        # if i > 1000000: break
+        try:
+            text = entry["text"]
+            emojis = ["Flag of United States","High voltage sign","Heavy red heart"]
 
             text = refine(text)
-            if len(text) > 0:
-                porno.append(np.array(text, np.int32).tostring())
-
-        # clean
-        clean = []
-        for line in codecs.open(g, 'r', 'utf8'):
-            try:
-                text = re.search('"summary":"(.+?)"', line).group(1)
-            except AttributeError:
-                continue
-
-            text = refine(text)
-            if len(text) > 0:
-                clean.append(np.array(text, np.int32).tostring())
-
-        # merge
-        num_samples = min(len(porno), len(clean)) # sync the number of both classes
-        texts = porno[:num_samples] + clean[:num_samples]
-        labels = [0]*num_samples + [1]*num_samples # 0: porno, 1: clean
-
-    elif hp.task_num == 2: # emoji
-        if mode == "train":
-            f = hp.train
-        elif mode == "dev":
-            f = hp.dev
-        else:
-            f = hp.test
-
-        texts, labels = [], []
-        i = 0
-        for entry in data:
-            i += 1
-            # if i > 1000000: break
-            try:
-                text = entry["text"]
-                emojis = ["Flag of United States","High voltage sign","Heavy red heart"]
-
-                text = refine(text)
-                emojis = [label2idx[emoji] for emoji in emojis if emoji in label2idx]
-                if len(text) > 0 and len(emojis) > 0:
-                    texts.append(np.array(text, np.int32).tostring())
-                    labels.append(np.array(emojis, np.int32).tostring())
-            except:
-                continue
-
-    # Monitor
-    print("number of samples:", len(texts))
-    print("texts look like:", " ".join(idx2word[t] for t in np.fromstring(texts[1], np.int32)))
-    print(str(hp.labels))
-    # print("labels look like:", " ".join(idx2label[t] for t in np.fromstring(labels[1], np.int32)))
+            emojis = [label2idx[emoji] for emoji in emojis if emoji in label2idx]
+            if len(text) > 0 and len(emojis) > 0:
+                texts.append(np.array(text, np.int32).tostring())
+                labels.append(np.array(emojis, np.int32).tostring())
+        except:
+            continue
 
     return texts, labels
 
