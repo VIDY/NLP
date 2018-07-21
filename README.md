@@ -295,7 +295,18 @@ flask run --host=0.0.0.0 --port=5005
 ```
 curl -X POST -d '[{"text":"The Oakland A’s Are Crashing the Playoff Race Again"},{"text":"I Used Apple’s New Controls to Limit a Teenager’s iPhone Time (and It Worked!)"}]' -H 'Content-type: application/json' http://130.211.155.193:5000/analyze-category
 ```
-
+```
+[  
+   {  
+      "score":-0.17566493153572083,
+      "category":"sports"
+   },
+   {  
+      "score":-1.8768072128295898,
+      "category":"technology"
+   }
+]
+```
 ```
 curl -X POST -d '[{"text":"A Patriotic Fourth: What Does That Mean Now?"},{"text":"Five Times the Internet Was Actually Fun in 2017"}]' -H 'Content-type: application/json' http://130.211.155.193:5001/analyze-emoji
 ```
