@@ -94,11 +94,8 @@ With just a hold, users can now reveal tiny hyper-relevant videos hidden behind 
 ## Related Keywords
 
   Given a keyword, list related words.
-
   Through word embedding a vocabulary is learned to map words or phrases to vectors of real numbers.
-
   The underlying idea is that "a word is characterized by the company it keeps".
-
   Conceptually it involves a mathematical embedding from a space with one dimension per word to a continuous vector space with a much lower dimension.
 
 ## Getting Started
