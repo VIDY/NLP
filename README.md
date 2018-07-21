@@ -307,23 +307,113 @@ curl -X POST -d '[{"text":"The Oakland A’s Are Crashing the Playoff Race Again
    }
 ]
 ```
+
 ```
 curl -X POST -d '[{"text":"A Patriotic Fourth: What Does That Mean Now?"},{"text":"Five Times the Internet Was Actually Fun in 2017"}]' -H 'Content-type: application/json' http://130.211.155.193:5001/analyze-emoji
 ```
+```
+[  
+   [  
+      "Flag of United States"
+   ],
+   [  
+      "Face with tears of joy"
+   ]
+]
+```
 
 ```
-curl -X POST -d '[{"text":"Suck my dick bitch I am gonna cum in your face"}]' -H 'Content-type: application/json' http://130.211.155.193:5002/analyze-offensive
+curl -X POST -d '[{"text":"Her ex-boyfriend had sex with her best friend."},{"text":"Trump Says Fed, China and Europe Hurt U.S. Economy"}]' -H 'Content-type: application/json' http://130.211.155.193:5002/analyze-offensive
+```
+```
+[
+   0,
+   1
+]
 ```
 
 ```
 curl -X POST -d '[{"text":"At this time I must confirm my exit from a show I&#39;ve called home for 3 years, with what is the most talented ensemble on television today, the ABC star said in a statement"},{"text":"Analysts say there is still room for diplomacy \u2014 but with more realistic goals."}]' -H 'Content-type: application/json' http://130.211.155.193:5003/analyze-sentiment
 ```
+```
+[  
+   0,
+   1
+]
+```
 
 ```
 curl -X POST -d '[{"text":"Global warming could wipe out most of the country’s remaining cedar forests by the end of the century."}]' -H 'Content-type: application/json' http://130.211.155.193:5004/analyze-keywords
+```
+```
+[  
+   [  
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+   ]
+]
 ```
 
 ```
 curl -X POST -d '{"word":"car"}' -H 'Content-type: application/json' http://130.211.155.193:5005/analyze-related
 ```
-
+```
+[  
+   {  
+      "word":"cars",
+      "distance":4.631352834271344
+   },
+   {  
+      "word":"vehicle",
+      "distance":4.692127319987073
+   },
+   {  
+      "word":"truck",
+      "distance":4.970341072520736
+   },
+   {  
+      "word":"driver",
+      "distance":5.188564331848413
+   },
+   {  
+      "word":"driving",
+      "distance":5.5373158679388235
+   },
+   {  
+      "word":"vehicles",
+      "distance":6.009785233931166
+   },
+   {  
+      "word":"automobile",
+      "distance":6.013379499825719
+   },
+   {  
+      "word":"drove",
+      "distance":6.125938972284942
+   },
+   {  
+      "word":"parked",
+      "distance":6.210490835926898
+   },
+   {  
+      "word":"motorcycle",
+      "distance":6.223316688091225
+   }
+]
+```
