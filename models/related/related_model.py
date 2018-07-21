@@ -32,7 +32,7 @@ class RelatedModel:
         for word in self.vocabulary:
             word_vector2=self.vocabulary[word]
             distance=self.euclidean_dist(word_vector1,word_vector2)
-            if distance>0
+            if distance>0:
                 results.append({"word":word,"distance":distance})
         results_sorted = sorted(results, key=itemgetter('distance'), reverse=False)
         return results_sorted[:10]

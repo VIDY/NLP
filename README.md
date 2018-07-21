@@ -209,7 +209,7 @@ Use pip list to show the packages installed in the virtual environment. Validate
 
  On the [training](#training) section you can read more about training our models from scratch on your own dataset.
 
- Download all our models on [http://storage.googleapis.com/vidy-nlp-models/v1.0-release.tar.gz](http://storage.googleapis.com/vidy-nlp-models/v1.0-release.tar.gz)
+ Download all our models on [http://storage.googleapis.com/vidy-nlp/data.tar](http://storage.googleapis.com/vidy-nlp/data.tar)
 
 ## Setting up Flask
 
@@ -255,7 +255,7 @@ Flask is a lightweight [WSGI](https://wsgi.readthedocs.io/) web application fram
 
 ## Training
 
-WIP
+W.I.P
 
 ## Launching the services
 
