@@ -211,6 +211,8 @@ Use pip list to show the packages installed in the virtual environment. Validate
 
  Download all our models on [http://storage.googleapis.com/vidy-nlp/data.tar](http://storage.googleapis.com/vidy-nlp/data.tar)
 
+ Please the downloaded folder at the root of the repository.
+
 ## Setting up Flask
 
 <p align="center"><img width="70%" src="images/flask.png" /></p>
