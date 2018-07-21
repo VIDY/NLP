@@ -292,6 +292,8 @@ flask run --host=0.0.0.0 --port=5005
 
 ## Calling the apis
 
+### Category Detection
+
 ```
 curl -X POST -d '[{"text":"The Oakland A’s Are Crashing the Playoff Race Again"},{"text":"I Used Apple’s New Controls to Limit a Teenager’s iPhone Time (and It Worked!)"}]' -H 'Content-type: application/json' http://130.211.155.193:5000/analyze-category
 ```
@@ -308,6 +310,8 @@ curl -X POST -d '[{"text":"The Oakland A’s Are Crashing the Playoff Race Again
 ]
 ```
 
+### Emoji Analysis
+
 ```
 curl -X POST -d '[{"text":"A Patriotic Fourth: What Does That Mean Now?"},{"text":"Five Times the Internet Was Actually Fun in 2017"}]' -H 'Content-type: application/json' http://130.211.155.193:5001/analyze-emoji
 ```
@@ -322,6 +326,8 @@ curl -X POST -d '[{"text":"A Patriotic Fourth: What Does That Mean Now?"},{"text
 ]
 ```
 
+### Offensive Content
+
 ```
 curl -X POST -d '[{"text":"Her ex-boyfriend had sex with her best friend."},{"text":"Trump Says Fed, China and Europe Hurt U.S. Economy"}]' -H 'Content-type: application/json' http://130.211.155.193:5002/analyze-offensive
 ```
@@ -332,6 +338,8 @@ curl -X POST -d '[{"text":"Her ex-boyfriend had sex with her best friend."},{"te
 ]
 ```
 
+### Sentiment Analysis
+
 ```
 curl -X POST -d '[{"text":"At this time I must confirm my exit from a show I&#39;ve called home for 3 years, with what is the most talented ensemble on television today, the ABC star said in a statement"},{"text":"Analysts say there is still room for diplomacy \u2014 but with more realistic goals."}]' -H 'Content-type: application/json' http://130.211.155.193:5003/analyze-sentiment
 ```
@@ -341,6 +349,8 @@ curl -X POST -d '[{"text":"At this time I must confirm my exit from a show I&#39
    1
 ]
 ```
+
+### Keyword Extraction
 
 ```
 curl -X POST -d '[{"text":"Global warming could wipe out most of the country’s remaining cedar forests by the end of the century."}]' -H 'Content-type: application/json' http://130.211.155.193:5004/analyze-keywords
@@ -369,6 +379,8 @@ curl -X POST -d '[{"text":"Global warming could wipe out most of the country’s
    ]
 ]
 ```
+
+### Related Keywords
 
 ```
 curl -X POST -d '{"word":"car"}' -H 'Content-type: application/json' http://130.211.155.193:5005/analyze-related
