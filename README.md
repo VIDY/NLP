@@ -1,7 +1,7 @@
 # Vidy NLP Protocol
 Python implementation of the NLP models used by the contextual ad placement platform
 
-<p align="center"><img width="70%" src="images/vidy-nlp-protocol.png" /></p>
+<p align="center"><img width="70%" src="images/vidy-nlp-protocol.png" title="Vidy NLP" /></p>
 
 Vidy has invented the first single-page invisible embed layer for video, run on the Ethereum blockchain.
 With just a hold, users can now reveal tiny hyper-relevant videos hidden behind the text of any page on the web, unlocking a whole new dimension to the internet.
